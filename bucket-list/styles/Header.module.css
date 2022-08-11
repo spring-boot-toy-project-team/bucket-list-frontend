@@ -1,0 +1,22 @@
+
+.container {
+  padding: 0;
+  margin: 0;
+  background-color: #65FF7E;
+  height: 5em;
+  display: flex;
+}
+
+.title {
+  margin: .5em;
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.search {
+  background-color: #FFFFFF;
+}
