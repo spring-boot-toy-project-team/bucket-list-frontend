@@ -1,11 +1,11 @@
 import styles from "../../../styles/Register.module.css";
 
 interface Props {
-  label: string,
-  name: string,
+  label: string;
+  name: string;
 }
 
-const TextWithButton : React.FC<Props> = ({label, name}) => {
+const TextWithButton: React.FC<Props> = ({ label, name }) => {
   return (
     <div className="mb-3">
       <div className="row">
@@ -16,7 +16,12 @@ const TextWithButton : React.FC<Props> = ({label, name}) => {
           <input className={styles.inputBox} name={name}></input>
         </div>
         <div className="col">
-        <button type="button" className={"btn btn-primary btn-lg " + styles.checkButton}>중복 확인</button>
+          <button
+            type="button"
+            className={"btn btn-primary btn-lg " + styles.checkButton}
+          >
+            중복 확인
+          </button>
         </div>
       </div>
     </div>

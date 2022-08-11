@@ -1,11 +1,11 @@
 import styles from "../../../styles/Header.module.css";
 
 interface Props {
-  isLogin: Boolean;
+  isLogin: boolean;
 }
 
-const Header : React.FC<Props> = ({isLogin}) => {
-  if(isLogin) {
+const Header: React.FC<Props> = ({ isLogin }) => {
+  if (isLogin) {
     return (
       <div className={styles.container}>
         <div className={styles.title}>BUCKET LIST</div>
@@ -17,7 +17,7 @@ const Header : React.FC<Props> = ({isLogin}) => {
       <div className={styles.container}>
         <div className={styles.title}>BUCKET LIST</div>
       </div>
-    )
+    );
   }
 };
 

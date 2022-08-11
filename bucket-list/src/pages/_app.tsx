@@ -9,10 +9,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     import("bootstrap/dist/css/bootstrap.css");
   }, []);
   return (
-  <>
-    <Header isLogin={false}/>
-    <Component {...pageProps} />
-  </>);
+    <>
+      <Header isLogin={false} />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;
