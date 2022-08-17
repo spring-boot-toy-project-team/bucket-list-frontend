@@ -1,6 +1,11 @@
 import TextInputBox from "./TextInputBox";
 import TextWithButton from "./TextWithButton";
 import styles from "../../../styles/Register.module.css";
+import { useState } from "react";
+
+type Data = {
+  
+}
 
 const dataWithButton = [
   {
@@ -28,6 +33,14 @@ const dataWithText = [
 ];
 
 const Register = () => {
+  const [info, setInfo] = useState<{email: String; nickName: String, password1: String, password2: String}>({
+    email: "",
+    nickName: "",
+    password1: "",
+    password2: ""
+  });
+
+  
   return (
     <div className={styles.container}>
       {Array.from({ length: 1 }, (_, i) => (
