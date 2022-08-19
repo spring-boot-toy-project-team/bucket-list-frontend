@@ -4,13 +4,13 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 80%;
   height: 80%;
-  background-color: #e5e5e5;
   border-radius: 15px;
   padding: 45px 30px;
 `;
 const LoginForm = styled.div`
   width: 100%;
   height: 50%;
+  margin-bottom: 2rem;
 
   .inputForm {
     width: 100%;
@@ -27,6 +27,7 @@ const LoginForm = styled.div`
       border-left: none;
       border-right: none;
       cursor: pointer;
+      margin-bottom: 2rem;
     }
     > input:hover {
       border-bottom: 1px solid #a4b0be;
@@ -38,12 +39,17 @@ const LoginForm = styled.div`
     > button {
       width: 100%;
       height: 3.5rem;
-      border: none;
+      border: 3px solid #1e90ff;
       border-radius: 8px;
-      margin-bottom: 20px;
-      background-color: #1e90ff;
-      color: white;
+      margin-bottom: 2rem;
+      color: black;
       font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: white;
+    }
+    > button:hover {
+      background-color: #1e90ff;
     }
   }
 
@@ -61,9 +67,12 @@ const OauthLogin = styled.div`
     height: 3.5rem;
     margin-bottom: 20px;
     border-radius: 10px;
-    font-size: 1rem;
     text-align: left;
-    padding-left: 4rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
   }
 
   .to-google {

@@ -1,4 +1,7 @@
+import Link from "next/link";
+import { useState } from "react";
 import styled from "styled-components";
+import HeadMenu from "./HeaderMenu";
 
 const HeadContainer = styled.div`
   background-color: #001d6e;
@@ -14,6 +17,7 @@ const Logo = styled.div`
   > span {
     font-size: 2rem;
     color: white;
+    cursor: pointer;
   }
 `;
 
@@ -45,18 +49,28 @@ const SearchLogin = styled.div`
     padding-left: 7px;
     border-radius: 100%;
     font-size: 13px;
+    cursor: pointer;
   }
 `;
 
 const Header = () => {
+  const [menu, setMenu] = useState<boolean>(false);
+
+  const menuHandler = () => {
+    setMenu(!menu);
+  };
+
   return (
     <HeadContainer>
-      <Logo>
-        <span>Buket List</span>
-      </Logo>
+      <HeadMenu menu={menu} setMenu={setMenu} />
+      <Link href="/">
+        <Logo>
+          <span>Buket List</span>
+        </Logo>
+      </Link>
       <SearchLogin>
         <input type="text" />
-        <div>프로필</div>
+        <div onClick={menuHandler}>프로필</div>
       </SearchLogin>
     </HeadContainer>
   );
