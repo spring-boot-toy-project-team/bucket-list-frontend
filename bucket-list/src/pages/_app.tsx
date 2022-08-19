@@ -1,16 +1,10 @@
+import Header from "../components/Header/Header";
 import "../../styles/globals.css";
-import "bootstrap/dist/css/bootstrap.css";
-import type { AppProps } from "next/app";
-import Header from "../components/Main/Header";
-import { useEffect } from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    import("bootstrap/dist/css/bootstrap.css");
-  }, []);
+function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Header isLogin={false} />
+      <Header />
       <Component {...pageProps} />
     </>
   );

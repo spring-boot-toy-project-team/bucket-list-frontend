@@ -1,11 +1,7 @@
-import TextInputBox from "./TextInputBox";
-import TextWithButton from "./TextWithButton";
-import styles from "../../../styles/Register.module.css";
 import { useState } from "react";
+import RegisterForm from "./RegisterForm";
 
-type Data = {
-  
-}
+// type Data = {};
 
 const dataWithButton = [
   {
@@ -33,37 +29,19 @@ const dataWithText = [
 ];
 
 const Register = () => {
-  const [info, setInfo] = useState<{email: String; nickName: String, password1: String, password2: String}>({
+  const [info, setInfo] = useState<{
+    email: string;
+    nickName: string;
+    password1: string;
+    password2: string;
+  }>({
     email: "",
     nickName: "",
     password1: "",
-    password2: ""
+    password2: "",
   });
 
-  
-  return (
-    <div className={styles.container}>
-      {Array.from({ length: 1 }, (_, i) => (
-        <TextWithButton
-          label={dataWithButton[i].label}
-          name={dataWithButton[i].name}
-        />
-      ))}
-      {Array.from({ length: 3 }, (_, i) => (
-        <TextInputBox
-          label={dataWithText[i].label}
-          name={dataWithText[i].name}
-          password={dataWithText[i].password}
-        />
-      ))}
-      <button
-        type="button"
-        className={"btn btn-primary btn-lg " + styles.signUpButton}
-      >
-        가입하기
-      </button>
-    </div>
-  );
+  return <RegisterForm />;
 };
 
 export default Register;

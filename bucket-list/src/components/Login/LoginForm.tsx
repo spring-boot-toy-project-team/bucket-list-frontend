@@ -7,12 +7,12 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-  const submit =async (e: SyntheticEvent) => {
-    e.preventDefault();
-    const response = await loginApi({email, password});
-    console.log(response);
-  }
+  //! 로그인 데이터
+  // const submit =async (e: SyntheticEvent) => {
+  //   e.preventDefault();
+  //   const response = await loginApi({email, password});
+  //   console.log(response);
+  // }
 
   return (
     <div className={styles.loginContainer}>
