@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import axios from "axios";
+// import axios from "axios";
+
+import axios from "../../../../config/axios";
 
 // const loginApi = async (data: object) => {
 //   try {
@@ -13,7 +15,7 @@ import axios from "axios";
 // };
 
 const loginApi = async (data: { email: string; password: string; }) => {
-  const url = `http://localhost:8080/auth/login`;
+  const url = `/auth/login`;
   try {
     const response = await axios.post(url, data);
     console.log(response);
