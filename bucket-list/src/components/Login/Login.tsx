@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useRef } from "react";
 import styled from "styled-components";
+import loginApi from "../../pages/api/users/login";
 
 const Container = styled.div`
   width: 80%;
@@ -97,12 +98,13 @@ const Login = () => {
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (event: React.FormEvent) => {
+  const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const userId = idRef.current!.value;
     const userPassword = passwordRef.current!.value;
 
+    await loginApi({email: userId, password: userPassword});
     console.log(userId, userPassword); // input 안의 값들 처리
 
     if (userId !== undefined && userPassword !== undefined) {

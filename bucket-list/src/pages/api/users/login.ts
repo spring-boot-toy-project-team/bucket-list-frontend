@@ -12,10 +12,10 @@ import axios from "axios";
 //   }
 // };
 
-const loginApi = async () => {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=bd278d7ccd0737ea15f7e000bf917678&lang=kr`;
+const loginApi = async (data: { email: string; password: string; }) => {
+  const url = `http://localhost:8080/auth/login`;
   try {
-    const response = await axios.get(url);
+    const response = await axios.post(url, data);
     console.log(response);
   } catch (error) {
     console.log(error);

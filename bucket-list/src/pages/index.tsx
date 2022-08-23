@@ -29,7 +29,7 @@ const LoginForm = styled.div`
 `;
 
 const Home: NextPage = () => {
-  console.log(loginApi());
+  // console.log(loginApi());
   const url = `https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=bd278d7ccd0737ea15f7e000bf917678&lang=kr`;
 
   // fetch(url, { method: "GET" })
