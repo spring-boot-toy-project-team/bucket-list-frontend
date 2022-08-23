@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styled from "styled-components";
 
 const InputBox = styled.div`
@@ -17,16 +18,33 @@ const InputBox = styled.div`
   }
 `;
 
-interface Props {
+type Props = {
+  id: string;
   type: string;
   lableText: string;
-}
+  userInfo: string;
+  setUserInfo: (text: string) => void;
+  checkFuc: (text: string) => void;
+};
 
-const InputForm: React.FC<Props> = ({ type, lableText }) => {
+const InputForm: React.FC<Props> = ({
+  id,
+  type,
+  lableText,
+  userInfo,
+  setUserInfo,
+  checkFuc,
+}) => {
+  //* onChange Fuc
+  const userInfoHanlder = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo(event.target.value);
+    checkFuc(event.target.value);
+  };
+
   return (
     <InputBox>
-      <label>{lableText}</label>
-      <input type={type} />
+      <label htmlFor="user">{lableText}</label>
+      <input type={type} id={id} onChange={userInfoHanlder} maxLength={30} />
     </InputBox>
   );
 };

@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Link from "next/link";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -92,19 +94,40 @@ const OauthLogin = styled.div`
 `;
 
 const Login = () => {
+  const idRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const userId = idRef.current!.value;
+    const userPassword = passwordRef.current!.value;
+
+    console.log(userId, userPassword); // input 안의 값들 처리
+
+    if (userId !== undefined && userPassword !== undefined) {
+      idRef.current!.value = "";
+      passwordRef.current!.value = "";
+    }
+  };
+
   return (
     <Container>
       <LoginForm>
-        <form className="inputForm">
-          <input type="text" placeholder="이메일을 입력해주세요." />
-          <input type="password" placeholder="비밀번호를 입력해주세요." />
+        <form onSubmit={submitHandler} className="inputForm">
+          <input ref={idRef} type="text" placeholder="이메일을 입력해주세요." />
+          <input
+            ref={passwordRef}
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+          />
           <button type="submit">로그인</button>
         </form>
         <div className="loginLink">
-          <Link href="/sign-up">
+          <Link href="/signup">
             <a>회원가입</a>
           </Link>
-          <Link href="/find-password">
+          <Link href="/password">
             <a>비밀번호 찾기</a>
           </Link>
         </div>

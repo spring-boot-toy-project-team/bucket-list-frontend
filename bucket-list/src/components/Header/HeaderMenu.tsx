@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prettier/prettier */
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Menu = styled.div`
+const Menu = styled.div<{ display: string }>`
   width: 13rem;
   height: 10rem;
   position: absolute;

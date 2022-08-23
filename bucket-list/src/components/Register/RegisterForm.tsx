@@ -1,3 +1,7 @@
+/* eslint-disable prefer-const */
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import InputForm from "./InputForm";
 
@@ -24,34 +28,175 @@ const Form = styled.form`
     color: white;
     cursor: pointer;
   }
-
-  > span {
-    display: block;
-    margin-top: 5px;
-    color: red;
-    padding-left: 10px;
-    margin-bottom: 2rem;
-  }
 `;
+
+const Validation = styled.span`
+  display: block;
+  margin-top: 5px;
+  color: red;
+  padding-left: 10px;
+  margin-bottom: 2rem;
+`;
+
+//? 이메일은 입력할 때다 api를 전송해서 데이터를 받아야 한다.
+//* span은 하나로 구성하고 조건에 따라서 안에 들어가는 텍스트 내용이 변하도록 만들기
+
+type MyFormProps = {
+  email: string;
+  nickname: string;
+  password1: string;
+};
+
+type UserEx = {
+  email: string;
+  password: string;
+  nickName: string;
+  tel: string;
+};
+
 const RegisterForm = () => {
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+
+  const [validEmail, setValidEmail] = useState("");
+  const [validNickname, setValidNickname] = useState("");
+  const [validPassword1, setValidPassword1] = useState("");
+  const [validPassword2, setValidPassword2] = useState("");
+
+  const userEx: UserEx = {
+    email: "hgd@gmail.com",
+    password: "1234",
+    nickName: "hgd",
+    tel: "010-1234-5678",
+  };
+
+  //* 전송할 User Data
+  const onSubmit = (form: MyFormProps) => {
+    console.log(form);
+  };
+
+  //* 버튼 클릭시 제출되는 form 핸들러
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form: MyFormProps = {
+      email,
+      nickname,
+      password1,
+    };
+    onSubmit(form);
+
+    if (email.length === 0) {
+      setValidEmail("이메일은 필수정보 입니다.");
+    }
+    if (nickname.length === 0) {
+      setValidNickname("닉네임은 필수정보 입니다.");
+    }
+    if (password1.length === 0) {
+      setValidPassword1("비밀번호는 필수정보 입니다.");
+    }
+  };
+
+  //* validation infor check
+  const emailCheck = (text: string) => {
+    if (text === userEx.email) {
+      setValidEmail("사용 중인 이메일 주소 입니다.");
+    }
+    if (text.length === 0) {
+      setValidEmail("이메일은 필수정보 입니다.");
+    }
+  };
+
+  const nicknameCheck = (text: string) => {
+    if (text.length < 3) {
+      setValidNickname("닉네임은 3글자 이상 되어야 합니다.");
+    }
+    if (text.length > 2) {
+      setValidNickname("");
+    }
+    if (text.length === 0) {
+      setValidNickname("닉네임은 필수정보 입니다.");
+    }
+    if (text === userEx.nickName) {
+      setValidNickname("사용 중인 닉네임 입니다.");
+    }
+  };
+
+  const passwordCheck1 = (num: string) => {
+    if (num.length < 5 || num.length > 30) {
+      setValidPassword1("5~30글자 이내로 입력해 주십시오.");
+    } else if (num.length === 0) {
+      setValidPassword1("비밀번호는 필수정보 입니다.");
+    } else {
+      setValidPassword1("");
+    }
+  };
+
+  const passwordCheck2 = (num: string) => {
+    if (num !== password1) {
+      setValidPassword2("비밀번호가 일치하지 않습니다.");
+    }
+    if (num === password1) {
+      setValidPassword2("");
+    }
+  };
+
   return (
     <Container>
-      <Form>
-        <InputForm type="text" lableText="이메일을 입력해주세요." />
-        <span>이메일이 입력되지 않았습니다.</span>
-        <span>이미 등록된 이메일 입니다.</span>
+      <Form onSubmit={handleSubmit}>
+        <InputForm
+          id="userEmail"
+          type="text"
+          lableText="이메일을 입력해주세요."
+          userInfo={email}
+          setUserInfo={setEmail}
+          checkFuc={emailCheck}
+        />
+        <Validation>{validEmail}</Validation>
+        {/* 이메일 주소가 올바르지 않습니다. - onChange*/}
+        {/* 사용 중인 이메일 주소 입니다. - onChange*/}
+        {/* 이메일은 필수정보 입니다. - onSubmit */}
 
-        <InputForm type="text" lableText="닉네임을 입력해주세요." />
-        <span>닉네임이 입력되지 않았습니다.</span>
-        <span>이미 등록된 닉네임 입니다.</span>
+        <InputForm
+          id="userNickname"
+          type="text"
+          lableText="닉네임을 입력해주세요."
+          userInfo={nickname}
+          setUserInfo={setNickname}
+          checkFuc={nicknameCheck}
+        />
+        <Validation>{validNickname}</Validation>
+        {/* 닉네임은 5글자 이상 되어야 합니다 - onChange*/}
+        {/* 사용 중인 닉네임 입니다. - onChange*/}
+        {/* 넥네임은 필수정보 입니다 - onSubmit */}
 
-        <InputForm type="password" lableText="비밀번호을 입력해주세요." />
-        <span>비밀번호가 입력되지 않았습니다.</span>
+        <InputForm
+          id="userPassword1"
+          type="password"
+          lableText="비밀번호을 입력해주세요."
+          userInfo={password1}
+          setUserInfo={setPassword1}
+          checkFuc={passwordCheck1}
+        />
+        <Validation>{validPassword1}</Validation>
+        {/* 5~30글자 이내로 입력해 주십시오 - onChange*/}
+        {/* 비밀번호는 필수정보 입니다. - onSubmit */}
 
-        <InputForm type="password" lableText="비밀번호를 다시 입력해주세요." />
-        <span>비밀번호가 일치하지 않습니다.</span>
+        <InputForm
+          id="userPassword2"
+          type="password"
+          lableText="비밀번호를 다시 입력해주세요."
+          userInfo={password2}
+          setUserInfo={setPassword2}
+          checkFuc={passwordCheck2}
+        />
+        <Validation>{validPassword2}</Validation>
+        {/* 비밀번호가 일치하지 않습니다. - onChange */}
 
-        <button className="form-button">가입하기</button>
+        <button type="submit" className="form-button">
+          가입하기
+        </button>
       </Form>
     </Container>
   );

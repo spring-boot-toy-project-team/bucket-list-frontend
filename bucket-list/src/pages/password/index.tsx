@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styled from "styled-components";
+import PassModal from "../../components/PasswordModal/passModal";
 import InputForm from "../../components/Register/InputForm";
 
 const Container = styled.div`
@@ -37,16 +39,27 @@ const Form = styled.div`
 `;
 
 const FindPassword = () => {
+  const [modalControl, setModalContorl] = useState(false);
+  const [findEmail, setFindEmail] = useState("");
+
+  const submitHandlar = () => {
+    setModalContorl(!modalControl);
+  };
+
   return (
     <Container>
+      <PassModal modalControl={modalControl} />
       <Form>
-        <InputForm type="text" lableText="이메일을 입력해주세요." />
+        <InputForm
+          id="text"
+          type="text"
+          lableText="이메일을 입력해주세요."
+          setUserInfo={setFindEmail}
+        />
         <span className="warningMaring">이메일을 입력해주세요.</span>
+        <span className="warningMaring">가입된 이메일이 아닙니다.</span>
 
-        <InputForm type="text" lableText="닉네임을 입력해주세요." />
-        <span className="warningMaring">닉네임을 입력해주세요.</span>
-
-        <button>비밀번호 찾기</button>
+        <button onClick={submitHandlar}>비밀번호 찾기</button>
       </Form>
     </Container>
   );
