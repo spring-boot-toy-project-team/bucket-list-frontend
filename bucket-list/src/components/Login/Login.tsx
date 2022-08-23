@@ -106,6 +106,9 @@ const Login = () => {
 
     const loginData = {email: userId, password: userPassword};
     
+
+
+    
     await loginApi(loginData);
     console.log(userId, userPassword); // input 안의 값들 처리
 
