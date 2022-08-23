@@ -104,7 +104,9 @@ const Login = () => {
     const userId = idRef.current!.value;
     const userPassword = passwordRef.current!.value;
 
-    await loginApi({email: userId, password: userPassword});
+    const loginData = {email: userId, password: userPassword};
+    
+    await loginApi(loginData);
     console.log(userId, userPassword); // input 안의 값들 처리
 
     if (userId !== undefined && userPassword !== undefined) {
