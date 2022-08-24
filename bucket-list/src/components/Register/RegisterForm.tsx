@@ -41,18 +41,18 @@ const Validation = styled.span`
 //? 이메일은 입력할 때다 api를 전송해서 데이터를 받아야 한다.
 //* span은 하나로 구성하고 조건에 따라서 안에 들어가는 텍스트 내용이 변하도록 만들기
 
-type MyFormProps = {
+interface MyFormProps {
   email: string;
   nickname: string;
   password1: string;
-};
+}
 
-type UserEx = {
+interface UserEx {
   email: string;
   password: string;
   nickName: string;
   tel: string;
-};
+}
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");

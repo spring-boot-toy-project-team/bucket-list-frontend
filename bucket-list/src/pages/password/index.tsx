@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import PassModal from "../../components/PasswordModal/passModal";
 import InputForm from "../../components/common/Input";
@@ -28,23 +28,59 @@ const Form = styled.div`
     color: white;
     cursor: pointer;
   }
-
-  > span {
-    display: block;
-    margin-top: 5px;
-    color: red;
-    padding-left: 10px;
-    margin-bottom: 2rem;
-  }
 `;
+const Validation = styled.span`
+  display: block;
+  margin-top: 5px;
+  color: red;
+  padding-left: 10px;
+  margin-bottom: 2rem;
+`;
+
+interface UserEx {
+  email: string;
+  password: string;
+  nickName: string;
+  tel: string;
+}
 
 const FindPassword = () => {
   const [modalControl, setModalContorl] = useState(false);
   const [findEmail, setFindEmail] = useState("");
+  const [validEmail, setValidEmail] = useState("");
+
+  const userEx: UserEx = {
+    email: "hgd@gmail.com",
+    password: "1234",
+    nickName: "hgd",
+    tel: "010-1234-5678",
+  };
 
   const submitHandlar = () => {
-    setModalContorl(!modalControl);
+    if (findEmail !== userEx.email) {
+      setValidEmail("입력하신 이메일을 찾을 수가 없습니다.");
+    }
+    if (findEmail === userEx.email) {
+      setModalContorl(!modalControl);
+    }
   };
+
+  const checkEmail = (text: string) => {
+    if (text.length === 0) {
+      setValidEmail("이메일은 필수정보 입니다.");
+    }
+    if (text.length > 1) {
+      setValidEmail("");
+    }
+  };
+
+  const onChangeEmail = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFindEmail(event.target.value);
+      checkEmail(event.target.value);
+    },
+    []
+  );
 
   return (
     <Container>
@@ -54,10 +90,9 @@ const FindPassword = () => {
           id="text"
           type="text"
           lableText="이메일을 입력해주세요."
-          setUserInfo={setFindEmail}
+          onChange={onChangeEmail}
         />
-        <span className="warningMaring">이메일을 입력해주세요.</span>
-        <span className="warningMaring">가입된 이메일이 아닙니다.</span>
+        <Validation>{validEmail}</Validation>
 
         <button onClick={submitHandlar}>비밀번호 찾기</button>
       </Form>

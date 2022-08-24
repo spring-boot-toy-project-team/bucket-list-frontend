@@ -41,11 +41,13 @@ const PassModal: React.FC<{ modalControl: boolean }> = ({ modalControl }) => {
   const goHome = () => {
     setTimeout(() => {
       router.push("/");
-    }, 4000);
+    }, 3000);
   };
 
   useEffect(() => {
-    goHome();
+    if (modalControl) {
+      goHome();
+    }
   }, [modalControl]);
 
   return (
