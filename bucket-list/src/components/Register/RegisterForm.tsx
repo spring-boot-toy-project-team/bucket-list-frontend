@@ -1,9 +1,9 @@
 /* eslint-disable prefer-const */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import InputForm from "./InputForm";
+import InputForm from "../common/Input";
 
 const Container = styled.div`
   width: 100%;
@@ -142,16 +142,48 @@ const RegisterForm = () => {
     }
   };
 
+  //* input의 onChange Fuc
+  const onChangeEmail = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(event.target.value);
+      emailCheck(event.target.value);
+    },
+    []
+  );
+  const onChangeNickname = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setNickname(event.target.value);
+      nicknameCheck(event.target.value);
+    },
+    []
+  );
+  const onChangePassword1 = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword1(event.target.value);
+      passwordCheck1(event.target.value);
+    },
+    []
+  );
+  const onChangePassword2 = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword2(event.target.value);
+    },
+    []
+  );
+
+  useEffect(() => {
+    passwordCheck2(password2);
+  }, [password2]);
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
         <InputForm
           id="userEmail"
-          type="text"
+          type="email"
           lableText="이메일을 입력해주세요."
-          userInfo={email}
-          setUserInfo={setEmail}
-          checkFuc={emailCheck}
+          onChange={onChangeEmail}
+          value={email}
         />
         <Validation>{validEmail}</Validation>
         {/* 이메일 주소가 올바르지 않습니다. - onChange*/}
@@ -162,9 +194,8 @@ const RegisterForm = () => {
           id="userNickname"
           type="text"
           lableText="닉네임을 입력해주세요."
-          userInfo={nickname}
-          setUserInfo={setNickname}
-          checkFuc={nicknameCheck}
+          onChange={onChangeNickname}
+          value={nickname}
         />
         <Validation>{validNickname}</Validation>
         {/* 닉네임은 5글자 이상 되어야 합니다 - onChange*/}
@@ -175,9 +206,8 @@ const RegisterForm = () => {
           id="userPassword1"
           type="password"
           lableText="비밀번호을 입력해주세요."
-          userInfo={password1}
-          setUserInfo={setPassword1}
-          checkFuc={passwordCheck1}
+          onChange={onChangePassword1}
+          value={password1}
         />
         <Validation>{validPassword1}</Validation>
         {/* 5~30글자 이내로 입력해 주십시오 - onChange*/}
@@ -187,9 +217,8 @@ const RegisterForm = () => {
           id="userPassword2"
           type="password"
           lableText="비밀번호를 다시 입력해주세요."
-          userInfo={password2}
-          setUserInfo={setPassword2}
-          checkFuc={passwordCheck2}
+          onChange={onChangePassword2}
+          value={password2}
         />
         <Validation>{validPassword2}</Validation>
         {/* 비밀번호가 일치하지 않습니다. - onChange */}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import PassModal from "../../components/PasswordModal/passModal";
-import InputForm from "../../components/Register/InputForm";
+import InputForm from "../../components/common/Input";
 
 const Container = styled.div`
   align-items: center;

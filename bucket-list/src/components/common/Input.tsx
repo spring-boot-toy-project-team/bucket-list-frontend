@@ -18,33 +18,17 @@ const InputBox = styled.div`
   }
 `;
 
-type Props = {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   type: string;
   lableText: string;
-  userInfo: string;
-  setUserInfo: (text: string) => void;
-  checkFuc: (text: string) => void;
-};
+}
 
-const InputForm: React.FC<Props> = ({
-  id,
-  type,
-  lableText,
-  userInfo,
-  setUserInfo,
-  checkFuc,
-}) => {
-  //* onChange Fuc
-  const userInfoHanlder = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo(event.target.value);
-    checkFuc(event.target.value);
-  };
-
+const InputForm: React.FC<Props> = ({ lableText, ...props }) => {
   return (
     <InputBox>
       <label htmlFor="user">{lableText}</label>
-      <input type={type} id={id} onChange={userInfoHanlder} maxLength={30} />
+      <input {...props} maxLength={30} />
     </InputBox>
   );
 };
