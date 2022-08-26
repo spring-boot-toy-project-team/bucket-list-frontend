@@ -1,27 +1,23 @@
-/* eslint-disable prettier/prettier */
-// import axios from "axios";
-
 import axios from "../../../../config/axios";
 
-// const loginApi = async (data: object) => {
-//   try {
-//     const uri = "http://localhost:8080/auth/login";
-//     axios.post(uri, data).then(response => {
-//       return response;
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+interface LoginAPIBody {
+  email: string;
+  password: string;
+}
 
-const loginApi = async (data: { email: string; password: string; }) => {
-  const url = `/auth/login`;
-  try {
-    const response = await axios.post(url, data);
-    console.log(response);
-  } catch (error) {
-    console.log(error);
-  }
+interface SignupAPIBody {
+  email: string;
+  password: string;
+  nickName: string;
+  tel: string;
+}
+
+export const loginApi = async (body: LoginAPIBody) => {
+  const url = "/auth/login";
+  return axios.post(url, body);
 };
 
-export default loginApi;
+export const signupApi = async (body: SignupAPIBody) => {
+  const url = "/auth/signup";
+  return axios.post(url, body);
+};

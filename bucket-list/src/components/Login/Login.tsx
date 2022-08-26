@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useRef } from "react";
 import styled from "styled-components";
-import loginApi from "../../pages/api/users/login";
+import { loginApi } from "../../pages/api/users/login";
 
 const Container = styled.div`
   width: 80%;
@@ -98,16 +98,20 @@ const Login = () => {
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = async (event: React.FormEvent) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const userId = idRef.current!.value;
     const userPassword = passwordRef.current!.value;
-
     const loginData = { email: userId, password: userPassword };
 
-    await loginApi(loginData);
-    console.log(userId, userPassword); // input 안의 값들 처리
+    //* api 받아오기
+    try {
+      const { data } = await loginApi(loginData);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
 
     if (userId !== undefined && userPassword !== undefined) {
       idRef.current!.value = "";

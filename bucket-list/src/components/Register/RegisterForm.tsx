@@ -1,8 +1,10 @@
 /* eslint-disable prefer-const */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import { signupApi } from "../../pages/api/users/login";
 import InputForm from "../common/Input";
 
 const Container = styled.div`
@@ -41,12 +43,6 @@ const Validation = styled.span`
 //? 이메일은 입력할 때다 api를 전송해서 데이터를 받아야 한다.
 //* span은 하나로 구성하고 조건에 따라서 안에 들어가는 텍스트 내용이 변하도록 만들기
 
-interface MyFormProps {
-  email: string;
-  nickname: string;
-  password1: string;
-}
-
 interface UserEx {
   email: string;
   password: string;
@@ -55,6 +51,8 @@ interface UserEx {
 }
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [password1, setPassword1] = useState("");
@@ -72,20 +70,24 @@ const RegisterForm = () => {
     tel: "010-1234-5678",
   };
 
-  //* 전송할 User Data
-  const onSubmit = (form: MyFormProps) => {
-    console.log(form);
-  };
-
   //* 버튼 클릭시 제출되는 form 핸들러
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form: MyFormProps = {
+
+    const signupBody: UserEx = {
       email,
-      nickname,
-      password1,
+      password: password2,
+      nickName: nickname,
+      tel: "010-1234-5678",
     };
-    onSubmit(form);
+
+    try {
+      const { data } = await signupApi(signupBody);
+      console.log(data);
+      router.push("/main");
+    } catch (e) {
+      console.log(e);
+    }
 
     if (email.length === 0) {
       setValidEmail("이메일은 필수정보 입니다.");
@@ -105,6 +107,9 @@ const RegisterForm = () => {
     }
     if (text.length === 0) {
       setValidEmail("이메일은 필수정보 입니다.");
+    }
+    if (text.length > 0) {
+      setValidEmail("");
     }
   };
 
