@@ -5,7 +5,7 @@ import HeadMenu from "./HeaderMenu";
 
 const HeadContainer = styled.div`
   background-color: #001d6e;
-  height: 8vh;
+  height: 8%;
   width: 100%;
   display: flex;
   align-items: center;
