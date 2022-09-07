@@ -5,8 +5,8 @@ import imgURL from "../../public/image/BucketList.png";
 import Image from "next/image";
 
 const Container = styled.div`
-  height: 92vh;
-  width: 100vw;
+  height: 92%;
+  width: 100%;
   display: flex;
 `;
 
