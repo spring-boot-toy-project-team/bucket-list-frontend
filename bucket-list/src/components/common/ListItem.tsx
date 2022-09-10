@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsHandThumbsUp } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 const Container = styled.div`
   width: 30%;
-  border: 3px solid green;
   padding: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px 12px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: white;
 `;
 
 const ImgContent = styled.div`
@@ -15,6 +19,7 @@ const ImgContent = styled.div`
 
   > img {
     width: 100%;
+    object-fit: cover;
     height: 100%;
   }
 `;
@@ -85,6 +90,7 @@ const ButtonComponent = styled.div`
 
 interface propsData {
   key: number;
+  id: number;
   memberId: number;
   title: string;
   image: string;
@@ -96,8 +102,13 @@ interface propsData {
 [];
 
 const ListItem = (props: propsData) => {
+  const router = useRouter();
+  const onClickHandler = () => {
+    router.push(`/main/bucket/${props.id}`);
+  };
+
   return (
-    <Container>
+    <Container onClick={onClickHandler}>
       <ImgContent>
         <img src={props.image} />
       </ImgContent>
