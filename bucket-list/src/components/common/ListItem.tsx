@@ -15,7 +15,6 @@ const Container = styled.div`
 const ImgContent = styled.div`
   width: 100%;
   height: 60%;
-  border: 1px solid blue;
 
   > img {
     width: 100%;

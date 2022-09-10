@@ -7,7 +7,6 @@ import { dummyData } from "../../../public/dummyData";
 const Container = styled.div`
   width: 100%;
   height: 92%;
-  border: 3px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
