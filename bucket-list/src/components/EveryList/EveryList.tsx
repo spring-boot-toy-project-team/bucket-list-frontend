@@ -7,33 +7,23 @@ import { dummyData } from "../../../public/dummyData";
 const Container = styled.div`
   width: 100%;
   height: 92%;
-  border: 3px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const Content = styled.div`
-  width: 90%;
-  height: 90%;
-  border: 3px solid black;
+  width: 91%;
+  height: 91%;
   padding: 30px;
   display: flex;
   gap: 30px 5%;
   flex-wrap: wrap;
   overflow: auto;
+  background-color: #ddf3f5;
+  border-radius: 8px;
 `;
-
-interface data {
-  memberId: number;
-  title: string;
-  image: string;
-  content: string;
-  tage: string[];
-  star: number;
-  choose: number;
-}
-[];
 
 const EveryList = () => {
   return (
@@ -43,6 +33,7 @@ const EveryList = () => {
           return (
             <ListItem
               key={item.memberId}
+              id={item.memberId}
               memberId={item.memberId}
               title={item.title}
               image={item.image}

@@ -12,10 +12,11 @@ interface Data {
 export const dummyData: Array<Data> = [
   {
     memberId: 1,
-    title: "운동배우기",
+    title: "운동",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-vwkcbiWTENOQSYJKpCPoHeufy8FCp65mGg&usqp=CAU",
-    content: "태니스를 배웠습니다",
+    content:
+      "태니스 배웠습니다. 앞으로의 목표는 강남구 테니스 대회에 나가는 것!",
     tage: ["#테니스", "#죽기전에해야하는운동"],
     star: 4,
     choose: 10,
