@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import HeadMenu from "./HeaderMenu";
+import { BiSearch } from "react-icons/bi";
 
 const HeadContainer = styled.div`
   background-color: #001d6e;
@@ -25,13 +26,18 @@ const SearchLogin = styled.div`
   display: flex;
   align-items: center;
   margin-right: 2rem;
+  position: relative;
+  .search-icon {
+    position: absolute;
+    left: 0.5em;
+  }
   > input {
     width: 20rem;
     height: 2.3rem;
     border: none;
     border-radius: 30px;
     margin-right: 2rem;
-    padding: 5px 15px;
+    padding: 5px 30px;
   }
 
   > input:focus {
@@ -69,6 +75,7 @@ const Header = () => {
         </Logo>
       </Link>
       <SearchLogin>
+        <BiSearch className="search-icon" />
         <input type="text" />
         <div onClick={menuHandler}>프로필</div>
       </SearchLogin>
